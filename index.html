@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <link rel="icon" href="assets/images/favicon.ico">
+
+  <title>Rock, Paper, Scissors</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Bowlby+One+SC|Khand" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h1>Rock, Paper, Scissors</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid jumbotron">
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <form>
+            <div class="form-group">
+              <label for="player-name">Player Name</label>
+              <input class="form-control" id="player-name" type="text">
+            </div>
+            <button class="btn btn-primary" id="start-game" type="submit">Start</button>
+          </form>
+      </div>
+    </div>
+  </div>
+  <br>
+  </div>
+  <div class="container-fluid jumbotron d-flex justify-content-around">
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="playerOne">Waiting for Player One...</h2>
+        <h2>WINS:<span id="wins"></span></h2>
+        <h2>LOSSES:<span id="losses"></span></h2>
+      </div>
+      <div class="col-md-4">
+        <h3 class="results-display"></h3>
+
+      </div>
+      <div class="col-md-4">
+        <h2 class="playerTwo">Waiting for Player Two...</h2>
+        <h2>WINS:<span id="wins"></span></h2>
+        <h2>LOSSES:<span id="losses"></span></h2>
+      </div>
+    </div>
+  </div>
+  <form>
+    <div class="form-group msgForm col-md-12 d-flex justify-content-center">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="messagesDiv" class="msg-wrapper"></div>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <textarea id="messageInput" placeholder="Message"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript" src="assets/logic.js"></script>
+</body>
+
+</html>

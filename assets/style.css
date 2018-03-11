@@ -1,0 +1,88 @@
+body {
+    font-family: 'Khand', sans-serif;
+    font-size: 18px;
+    line-height: 34px;
+    color: black;
+    background: url("images/lined_paper_@2X.png")
+}
+
+h1 {
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 70px;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Khand', sans-serif;
+    font-size: 27px;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Bangers', cursive;
+    font-size: 34px;
+    text-align: center;
+}
+
+footer {
+    font-family: 'Bangers', cursive;
+    padding: 3px 0;
+    clear: both;
+    font-size: 27px;
+    color: #fff;
+    color: #ccc;
+    text-align: center;
+    background: #666;
+    border-top: 8px solid #4aaaa5;
+}
+
+.jumbotron {
+    color: black;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+/*.flexcontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}*/
+.msgForm {
+  width: 100%;
+}
+.msg-wrapper {
+  max-height: 250px;
+  overflow: auto;
+}
+.msg-wrapper em {
+  font-size: 15px;
+  padding-right: 20px;
+  font-weight: bold;
+}
+.msg-wrapper div {
+  font-size: 16px
+}
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+    ...
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+    ...
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+    ...
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+    ...
+}
