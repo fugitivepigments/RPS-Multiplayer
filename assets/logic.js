@@ -18,6 +18,7 @@
 //display results
 //if disconnected removed from firebase
 //chat window where disconnect message is displayed
+
 //Global variables
 var wins = 0;
 var losses = 0;
@@ -75,22 +76,23 @@ function didYouWin(yourRPS, opponentRPS) {
 }
 
 
-$("#start-game").on("click", function(event) {
+$("#player-name").on("submit", function(event) {
   event.preventDefault();
-
 
   //Gets user input
   var playerName = $("#player-name").val().trim();
 
   //Players object
-  var players = [
+  var player =
      {
       name: playerName,
       wins: wins,
       losses: losses,
     }
-  ]
-  database.ref().push(players);
 
-  console.log(players);
+  database.ref("users").push(player);
+
+  $(".playerOne").text(playerName);
+
+  console.log(player);
 })
