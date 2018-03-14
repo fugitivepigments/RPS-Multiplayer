@@ -86,7 +86,7 @@ $("#form-player-name").on("submit", function(event) {
   // Gets user input
   var playerName = $("#player-name").val().trim();
 
-  // Players object
+  // Player object
   var player =
      {
       name: playerName,
@@ -97,42 +97,71 @@ $("#form-player-name").on("submit", function(event) {
   // add the player to our local array of the players
   players.push(player);
 
-  
-
   // This is where we update the dom
+  // and check which player the user will be
   addPlayer(player);
 
   // Push the user to our users array (table) in the database
   usersRef.set(player);
 
   console.log('player', player);
+
+
+  // Once a user logs in, you dont want them to log in again, 
+  // so remove that container
+  $('.login-wrapper').remove();
 })
 
 // This function will add the palyer to the dom, updating all necessary elements
 function addPlayer(player) {
 
+  // player one or player two?
   var playerNum = 0;
 
+  // if there is already a player in the local array, this player is player 2
+  // otherwise this player is player one
   if (players.length > 0) {
     playerNum = 2;
   } else {
     playerNum = 1;
   }
 
-  
-
-  // TODO - AM I PLAYER ONE OR PLAYER TWO??
-  // 
-
-
-
+  // Add all the stuff to the dom
   var $whichPlayer = $('.player-' + playerNum);
 
   $whichPlayer.find('.player-name').text(player.name);
   $whichPlayer.find('.wins').text(player.wins);
   $whichPlayer.find('.losses').text(player.losses);
 
+  // TODO -- 
+  // Check and see if we have both players, when we do, start the game!!!
+  // if ( check to see if we have both players ) {
+    // startGame();
+  // }
+}
 
+// This function starts the game
+function startGame() {
+
+  // TODO --
+  // Add Rocks, papers and scissors for the player to click on
+
+  // TODO --
+  // Add event listeners on those things to see which one they clicked
+
+  // This class is applied to all choices
+  $('.rpc-choice').on('click', function() {
+
+    // TODO --
+    // Check which one they clicked with a data attribute
+
+    // TODO --
+    // Once the user has made a choice, check if the other player has also made a choice
+
+    // If they have then match the two choices and see who one, and who lost,
+    // update the dom
+
+  });
 }
 
 
@@ -141,8 +170,6 @@ function addPlayer(player) {
 usersRef.on('value', function(snapshot) {
   if (snapshot.val()) {
     console.log( 'THIS SHOULD BE THE NEW USER snapshot.val()', snapshot.val() );
-
-    
 
     addPlayer( snapshot.val() );
 
