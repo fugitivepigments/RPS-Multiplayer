@@ -44,35 +44,36 @@
     <div class="row">
       <div class="col-md-4">
         <h2 class="playerOne">Waiting for Player One...</h2>
-        <h2>WINS:<span id="wins"></span></h2>
-        <h2>LOSSES:<span id="losses"></span></h2>
+        <h2>WINS:<span class="wins"></span></h2>
+        <h2>LOSSES:<span class="losses"></span></h2>
       </div>
       <div class="col-md-4">
         <h3 class="results-display"></h3>
-
       </div>
       <div class="col-md-4">
         <h2 class="playerTwo">Waiting for Player Two...</h2>
-        <h2>WINS:<span id="wins"></span></h2>
-        <h2>LOSSES:<span id="losses"></span></h2>
+        <h2>WINS:<span class="wins"></span></h2>
+        <h2>LOSSES:<span class="losses"></span></h2>
       </div>
     </div>
   </div>
-  <form>
-    <div class="form-group msgForm col-md-12 d-flex justify-content-center">
-      <div class="row">
-        <div class="col-md-12">
-          <div id="messagesDiv" class="msg-wrapper"></div>
-          <hr />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <textarea id="messageInput" placeholder="Message"></textarea>
-        </div>
-      </div>
+  <!-- Chat Section -->
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <div id="chatDisplay"></div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="chatInput">
+      <div class="chatLabel">Type Your Message!</div>
+
+    <div class="chatPanel">
+      <form id="chat-form">
+        <textarea type="text" id="chat-input"></textarea>
+        <input id="chat-send" type="submit" value="Send">
+      </form>
     </div>
-  </form>
+  </div>
   <script type="text/javascript" src="assets/logic.js"></script>
 </body>
 
