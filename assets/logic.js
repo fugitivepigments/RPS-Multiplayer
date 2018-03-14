@@ -39,6 +39,10 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+var usersRef = database.ref('users');
+
+var players = [];
+
 function didYouWin(yourRPS, opponentRPS) {
   // Run traditional rock, paper, scissors logic and return whether you won, lost, or had a draw.
   switch (yourRPS) {
@@ -75,24 +79,60 @@ function didYouWin(yourRPS, opponentRPS) {
   }
 }
 
-
-$("#player-name").on("submit", function(event) {
+// Listening for player name form submit
+$("#form-player-name").on("submit", function(event) {
   event.preventDefault();
 
-  //Gets user input
+  // Gets user input
   var playerName = $("#player-name").val().trim();
 
-  //Players object
+  // Players object
   var player =
      {
       name: playerName,
       wins: wins,
       losses: losses,
-    }
+    };
 
-  database.ref("users").push(player);
+  // add the player to our local array of the players
+  players.push(player);
 
-  $(".playerOne").text(playerName);
+  // Push the user to our users array (table) in the database
+  // usersRef.push(player);
 
-  console.log(player);
+  usersRef.set(player);
+
+  // This is where we update the dom
+  addPlayer(player);
+
+  console.log('player', player);
 })
+
+// This function will add the palyer to the dom, updating all necessary elements
+function addPlayer(player) {
+
+  // TODO - AM I PLAYER ONE OR PLAYER TWO??
+  // 
+
+  var $whichPlayer = $('.player-1');
+
+  $whichPlayer.find('.player-name').text(player.name);
+  $whichPlayer.find('.wins').text(player.wins);
+  $whichPlayer.find('.losses').text(player.losses);
+
+
+}
+
+
+
+// Listen for a player signing up
+usersRef.on('value', function(snapshot) {
+  if (snapshot.val()) {
+    console.log( 'THIS SHOULD BE THE NEW USER snapshot.val()', snapshot.val() );
+
+    addPlayer( snapshot.val() );
+  }
+  
+});
+
+
