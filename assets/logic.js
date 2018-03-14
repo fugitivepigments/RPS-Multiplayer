@@ -25,6 +25,8 @@ var losses = 0;
 var ties = 0;
 var turn = 1;
 
+var playerNum = 0;
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyCoC4q6nV6ettXcNZvq-xdGf3mG8BOWL7I",
@@ -42,6 +44,7 @@ var database = firebase.database();
 var usersRef = database.ref('users');
 
 var players = [];
+var localPlayer = {};
 
 function didYouWin(yourRPS, opponentRPS) {
   // Run traditional rock, paper, scissors logic and return whether you won, lost, or had a draw.
@@ -92,7 +95,13 @@ $("#form-player-name").on("submit", function(event) {
       name: playerName,
       wins: wins,
       losses: losses,
+      currentChoice: ''
     };
+
+  localPlayer = player;
+
+  // Push the user to our users array (table) in the database
+  usersRef.child(player.name).set(player);
 
   // add the player to our local array of the players
   players.push(player);
@@ -101,22 +110,26 @@ $("#form-player-name").on("submit", function(event) {
   // and check which player the user will be
   addPlayer(player);
 
-  // Push the user to our users array (table) in the database
-  usersRef.set(player);
-
   console.log('player', player);
 
 
   // Once a user logs in, you dont want them to log in again, 
   // so remove that container
   $('.login-wrapper').remove();
+
+  // TODO -- 
+  // Check and see if we have both players, when we do, start the game!!!
+  if ( players.length === 2 ) {
+    startGame();
+  }
+
 })
 
 // This function will add the palyer to the dom, updating all necessary elements
 function addPlayer(player) {
 
   // player one or player two?
-  var playerNum = 0;
+  
 
   // if there is already a player in the local array, this player is player 2
   // otherwise this player is player one
@@ -132,12 +145,6 @@ function addPlayer(player) {
   $whichPlayer.find('.player-name').text(player.name);
   $whichPlayer.find('.wins').text(player.wins);
   $whichPlayer.find('.losses').text(player.losses);
-
-  // TODO -- 
-  // Check and see if we have both players, when we do, start the game!!!
-  // if ( check to see if we have both players ) {
-    // startGame();
-  // }
 }
 
 // This function starts the game
@@ -145,6 +152,8 @@ function startGame() {
 
   // TODO --
   // Add Rocks, papers and scissors for the player to click on
+  $('.rpc-choices').removeClass('d-none');
+
 
   // TODO --
   // Add event listeners on those things to see which one they clicked
@@ -154,6 +163,29 @@ function startGame() {
 
     // TODO --
     // Check which one they clicked with a data attribute
+    var choice = $(this).data('rpc');
+
+    console.log('choice', choice);
+
+    localPlayer.currentChoice = choice;
+
+    // once the choice has been made, add it to the player object and
+    // push it to firebase
+
+    // database.ref('users/'+localPlayer.name).update(localPlayer);
+
+    //https://stackoverflow.com/questions/14963776/get-users-by-name-property-using-firebase
+    //https://firebase.google.com/docs/database/web/read-and-write#get_a_database_reference
+
+    console.log('localPlayer', localPlayer);
+
+    usersRef.child(localPlayer.name).update({ currentChoice: choice })
+
+
+    // then we need to check and see if the other player has made a choice
+
+    // get the other player by 
+
 
     // TODO --
     // Once the user has made a choice, check if the other player has also made a choice
@@ -167,7 +199,7 @@ function startGame() {
 
 
 // Listen for a player signing up
-usersRef.on('value', function(snapshot) {
+usersRef.once('value', function(snapshot) {
   if (snapshot.val()) {
     console.log( 'THIS SHOULD BE THE NEW USER snapshot.val()', snapshot.val() );
 
