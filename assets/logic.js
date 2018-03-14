@@ -97,13 +97,13 @@ $("#form-player-name").on("submit", function(event) {
   // add the player to our local array of the players
   players.push(player);
 
-  // Push the user to our users array (table) in the database
-  // usersRef.push(player);
-
-  usersRef.set(player);
+  
 
   // This is where we update the dom
   addPlayer(player);
+
+  // Push the user to our users array (table) in the database
+  usersRef.set(player);
 
   console.log('player', player);
 })
@@ -111,10 +111,22 @@ $("#form-player-name").on("submit", function(event) {
 // This function will add the palyer to the dom, updating all necessary elements
 function addPlayer(player) {
 
+  var playerNum = 0;
+
+  if (players.length > 0) {
+    playerNum = 2;
+  } else {
+    playerNum = 1;
+  }
+
+  
+
   // TODO - AM I PLAYER ONE OR PLAYER TWO??
   // 
 
-  var $whichPlayer = $('.player-1');
+
+
+  var $whichPlayer = $('.player-' + playerNum);
 
   $whichPlayer.find('.player-name').text(player.name);
   $whichPlayer.find('.wins').text(player.wins);
@@ -130,7 +142,12 @@ usersRef.on('value', function(snapshot) {
   if (snapshot.val()) {
     console.log( 'THIS SHOULD BE THE NEW USER snapshot.val()', snapshot.val() );
 
+    
+
     addPlayer( snapshot.val() );
+
+    // add the player to our local array of the players
+    players.push(snapshot.val());
   }
   
 });
